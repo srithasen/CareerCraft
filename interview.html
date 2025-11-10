@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Mock Interview</title>
+  <style>
+    body { margin:0; font-family:Arial, sans-serif; background:#000; color:#fff; text-align:center; }
+    video { width: 400px; height: 300px; border-radius: 12px; margin-top:20px; }
+    #chat { margin-top:20px; background:#111; padding:20px; border-radius:12px; max-width:600px; margin:auto; }
+    button { padding:12px 20px; border:none; border-radius:8px; margin:8px; cursor:pointer; }
+    #question { font-size:20px; margin:15px 0; }
+  </style>
+</head>
+<body>
+  <h2>🎤 AI Mock Interview</h2>
+  <video id="video" autoplay playsinline></video>
+  <div id="chat">
+    <p><b>AI Question:</b> <span id="question">Click Start to begin</span></p>
+    <p><b>Your Answer:</b> <span id="transcript"></span></p>
+    <button id="startInterview">Start Interview</button>
+    <button id="startRec" disabled>🎙 Start Answer</button>
+    <button id="stopRec" disabled>🛑 Stop Answer</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+  <script>
+    let mediaRecorder, audioChunks=[];
+    let video = document.getElementById("video");
+
+    // ✅ Camera access
+    navigator.mediaDevices.getUserMedia({ video:true, audio:true }).then(stream=>{
+      video.srcObject = stream;
+      detectFaces();
+    });
+
+    // ✅ Face detection (warn if >1 face)
+    async function detectFaces(){
+      await faceapi.nets.tinyFaceDetector.loadFromUri("https://cdn.jsdelivr.net/npm/face-api.js/weights");
+      setInterval(async ()=>{
+        const detections = await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions());
+        if(detections.length > 1){
+          alert("⚠ Multiple people detected! Only one candidate allowed.");
+        }
+      }, 2000);
+    }
+
+    // ✅ Speak question
+    function speak(text){
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-US"; speechSynthesis.speak(utter);
+    }
+
+    // ✅ Fetch first question
+    document.getElementById("startInterview").onclick = async ()=>{
+      const res = await fetch("mock-interview.php", { method:"POST" });
+      const data = await res.json();
+      document.getElementById("question").innerText = data.question;
+      speak(data.question);
+      document.getElementById("startRec").disabled = false;
+    };
+
+    // ✅ Record answer
+    document.getElementById("startRec").onclick = async ()=>{
+      const stream = await navigator.mediaDevices.getUserMedia({ audio:true });
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.start();
+      audioChunks = [];
+      mediaRecorder.ondataavailable = e=>audioChunks.push(e.data);
+      document.getElementById("transcript").innerText = "🎙 Listening...";
+      document.getElementById("stopRec").disabled = false;
+    };
+
+    document.getElementById("stopRec").onclick = async ()=>{
+      mediaRecorder.stop();
+      mediaRecorder.onstop = async ()=>{
+        const audioBlob = new Blob(audioChunks,{type:"audio/webm"});
+        // 📝 Speech-to-text API (replace with your backend Whisper/STT service)
+        const formData = new FormData();
+        formData.append("audio", audioBlob, "answer.webm");
+        const res = await fetch("speech_to_text.php",{ method:"POST", body:formData });
+        const data = await res.json();
+        document.getElementById("transcript").innerText = data.text;
+
+        // Send answer to backend, get next Q
+        const ansRes = await fetch("mock-interview.php",{ 
+          method:"POST", 
+          headers:{ "Content-Type":"application/x-www-form-urlencoded" },
+          body:"answer="+encodeURIComponent(data.text)
+        });
+        const ansData = await ansRes.json();
+        document.getElementById("question").innerText = ansData.question;
+        speak(ansData.question);
+      };
+    };
+  </script>
+</body>
+</html>

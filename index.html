@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SkillPath AI - Career Counseling</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      scroll-behavior: smooth;
+    }
+
+    .hero-section {
+      background: url('illustration.jpg') no-repeat center center;
+      background-size: cover;
+      height: 100vh;
+      color: white;
+      position: relative;
+    }
+
+    nav {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    nav img.logo {
+      height: 40px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff6347;
+    }
+
+    .login-btn {
+      background-color: #ff6347;
+      color: white;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .hero-text {
+      padding: 150px 60px;
+      max-width: 600px;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #ff6347;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-text a button {
+      padding: 14px 28px;
+      background-color: #ff6347;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Motivation Section */
+    .motivation {
+      background-color: #f4f4f4;
+      padding: 80px 60px;
+      text-align: center;
+    }
+
+    .motivation h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .motivation p {
+      font-size: 18px;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-text {
+        padding: 120px 20px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <nav>
+      <img src="logo.jpg" alt="Logo" class="logo">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#trend">Trend</a></li>
+        <li><a href="#company">Company</a></li>
+        <li><a href="#blog">Blog</a></li>
+      </ul>
+      <a href="login.php"><button class="login-btn">Login</button></a>
+    </nav>
+
+    <div class="hero-text" id="home">
+      <h1>Career Counseling</h1>
+      <p>Let us help you plan your tech career, step-by-step. With personalized AI suggestions and insights, grow smarter every day.</p>
+      <a href="signup.php"><button>Get Started for Free</button></a>
+    </div>
+  </div>
+
+  <!-- Motivational Section -->
+  <section class="motivation" id="trend">
+    <h2>Your Future Starts Now</h2>
+    <p>Discover what top companies look for, prepare your skillset with AI-powered paths, and unlock your career potential. The best investment you can make is in yourself — let's begin your journey today!</p>
+  </section>
+
+  <section class="motivation" id="company">
+    <h2>Top Hiring Companies</h2>
+    <p>From Google to startups, we analyze current hiring trends and prepare you accordingly. Stay ahead with real data, personalized advice, and portfolio building.</p>
+  </section>
+
+  <section class="motivation" id="blog">
+    <h2>Explore Career Insights</h2>
+    <p>Check out our blog for tips on resume building, interview cracking, and skill mastering. We help you grow smarter, faster.</p>
+  </section>
+
+</body>
+</html>
