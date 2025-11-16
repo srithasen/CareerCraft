@@ -1,14 +1,16 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Load .env file
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 // SMTP Configuration for PHPMailer
-
-define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_USERNAME', 'srithasen05@gmail.com'); // your Gmail address
-define('SMTP_PASSWORD', 'jkep rujp bosq khwn'); 
-define('SMTP_PORT', 587); // Gmail uses 587 for TLS
-define('SMTP_SECURE', 'tls'); 
-// MUST match SMTP_USERNAME above
-define('SMTP_FROM_EMAIL', 'srithasen05@gmail.com'); 
-define('SMTP_FROM_NAME', 'Career Planner Reset');
-
+define('SMTP_HOST', $_ENV['SMTP_HOST']);
+define('SMTP_USERNAME', $_ENV['SMTP_USERNAME']);
+define('SMTP_PASSWORD', $_ENV['SMTP_PASSWORD']);
+define('SMTP_PORT', $_ENV['SMTP_PORT']);
+define('SMTP_SECURE', $_ENV['SMTP_SECURE']);
+define('SMTP_FROM_EMAIL', $_ENV['SMTP_FROM_EMAIL']);
+define('SMTP_FROM_NAME', $_ENV['SMTP_FROM_NAME']);
 ?>
-
