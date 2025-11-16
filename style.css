@@ -44,3 +44,12 @@ ul {
 .btn:hover {
   background-color: #1d4ed8;
 }
+<<<<<<< HEAD
+=======
+
+.completed-row {
+    background-color: rgba(46, 204, 113, 0.35) !important; /* light green */
+    transition: background-color 0.3s ease;
+}
+
+>>>>>>> aadfe91714b8e381e3c613ec3ab3c310d595d975

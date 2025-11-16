@@ -1,0 +1,58 @@
+###############################################
+# ✅ SECURITY — DO NOT UPLOAD SENSITIVE FILES
+###############################################
+
+# Environment & secret credentials
+.env
+*.env
+phpmailer_config.php
+config.php
+db.php
+*.secret
+*.key
+
+###############################################
+# ✅ COMPOSER (PHP packages)
+###############################################
+/vendor/
+composer.lock
+
+###############################################
+# ✅ NODE (if you later use Tailwind / npm)
+###############################################
+node_modules/
+package-lock.json
+yarn.lock
+
+###############################################
+# ✅ LOGS / CACHE
+###############################################
+*.log
+*.cache
+phpunit.xml
+phpunit.result.cache
+storage/
+cache/
+
+###############################################
+# ✅ USER UPLOADED FILES (PDF, photos, resumes)
+###############################################
+uploads/*
+!uploads/.gitkeep
+
+###############################################
+# ✅ OS / EDITOR FILES
+###############################################
+.DS_Store
+Thumbs.db
+
+# IDE folders
+.idea/
+.vscode/
+
+###############################################
+# ✅ TEMPORARY DEVELOPMENT FILES
+###############################################
+*.tmp
+*.bak
+*.swp

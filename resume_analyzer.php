@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
       $pdf = $parser->parseFile($_FILES['resume']['tmp_name']);
       if (count($pdf->getPages()) > 2) throw new Exception("❌ Resume exceeds 2 pages.");
+<<<<<<< HEAD
       $resumeText = $pdf->getText();
 
       $nRes  = strtolower(str_replace(' ', '', $resumeText));
@@ -86,6 +87,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     } catch (Exception $e) {
       $message = $e->getMessage();
+=======
+
+      $resumeText = $pdf->getText();
+
+      /* 🔥 STRICT NAME/EMAIL VALIDATION — ONLY CHANGE ADDED */
+      $resumeNormalized = strtolower(preg_replace('/\s+/', '', $resumeText));
+      $nameNormalized   = strtolower(preg_replace('/\s+/', '', $accountName));
+      $emailNormalized  = strtolower(trim($accountEmail));
+
+      $nameMatch  = strpos($resumeNormalized, $nameNormalized) !== false;
+      $emailMatch = strpos($resumeNormalized, $emailNormalized) !== false;
+
+      if (!$nameMatch && !$emailMatch) {
+        throw new Exception("❌ The uploaded resume could not be verified. Your name or email was not detected in the document.");
+      }
+
+    } catch (Exception $e) {
+      $message = $e->getMessage();
+      $resumeText = ""; // stop further analysis
+>>>>>>> aadfe91714b8e381e3c613ec3ab3c310d595d975
     }
   } else {
     $message = "❌ Please upload a PDF resume.";
