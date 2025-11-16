@@ -16,4 +16,3 @@
 # Force HTML detection
 *.html linguist-language=HTML
 *.htm linguist-language=HTML
-
