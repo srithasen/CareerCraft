@@ -134,15 +134,10 @@ nav a:hover {
   </div>
 
   <div class="dashboard-section">
-<<<<<<< HEAD
-    <h2>Save your Notes</h2>
-    <p>Save your ideas, class notes, tasks, and reminders with a smart note editor supporting voice input and rich formatting.</p>
-    <a href="notes.php">Save your Notes &rarr;</a>
-=======
+
     <h2>Notes & Attachments</h2>
     <p>Save your ideas, class notes, tasks, and reminders with a smart note editor supporting voice input and rich formatting.</p>
     <a href="notes.php">Notes & Attachments &rarr;</a>
->>>>>>> aadfe91714b8e381e3c613ec3ab3c310d595d975
   </div>
 
   <div class="dashboard-section">

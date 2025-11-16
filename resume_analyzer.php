@@ -8,7 +8,7 @@ session_start();
  *   vlucas/phpdotenv
  *   smalot/pdfparser
  */
-require __DIR__.'/vendor/autoload.php';
+/*require __DIR__.'/vendor/autoload.php';
 
 use Smalot\PdfParser\Parser as PdfParser;
 use Dotenv\Dotenv;
@@ -75,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
       $pdf = $parser->parseFile($_FILES['resume']['tmp_name']);
       if (count($pdf->getPages()) > 2) throw new Exception("❌ Resume exceeds 2 pages.");
-<<<<<<< HEAD
       $resumeText = $pdf->getText();
 
       $nRes  = strtolower(str_replace(' ', '', $resumeText));
@@ -87,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     } catch (Exception $e) {
       $message = $e->getMessage();
-=======
+
 
       $resumeText = $pdf->getText();
 
@@ -106,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (Exception $e) {
       $message = $e->getMessage();
       $resumeText = ""; // stop further analysis
->>>>>>> aadfe91714b8e381e3c613ec3ab3c310d595d975
     }
   } else {
     $message = "❌ Please upload a PDF resume.";
