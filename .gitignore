@@ -12,27 +12,38 @@ db.php
 *.key
 
 ###############################################
-# ✅ COMPOSER (PHP packages)
+# ✅ AI / TEMP LOG FILES
 ###############################################
-/vendor/
-composer.lock
+ai_log.txt
+*.log
 
 ###############################################
-# ✅ NODE (if you later use Tailwind / npm)
+# ✅ COMPOSER (PHP packages)
+###############################################
+vendor/
+# composer.json should stay
+# composer.lock SHOULD also stay (do NOT ignore it)
+
+###############################################
+# ✅ NODE (Tailwind / npm)
 ###############################################
 node_modules/
 package-lock.json
 yarn.lock
 
 ###############################################
-# ✅ LOGS / CACHE
+# ✅ CACHE / TEMP / BUILD
 ###############################################
-*.log
 *.cache
-phpunit.xml
-phpunit.result.cache
+*.tmp
+*.bak
+*.swp
+
 storage/
 cache/
+
+phpunit.xml
+phpunit.result.cache
 
 ###############################################
 # ✅ USER UPLOADED FILES (PDF, photos, resumes)
@@ -51,8 +62,13 @@ Thumbs.db
 .vscode/
 
 ###############################################
-# ✅ TEMPORARY DEVELOPMENT FILES
+# ✅ MYSQL INTERNAL FILES (NEVER UPLOAD)
 ###############################################
-*.tmp
-*.bak
-*.swp
+*.frm
+*.ibd
+*.MYD
+*.MYI
+db.opt
+ib*
+mysql/
+data/
