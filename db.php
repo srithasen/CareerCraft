@@ -1,16 +1,22 @@
 <?php
-// db.php
+// db.php (SAFE VERSION)
 
-// Enable error reporting
+// Enable error reporting (optional for debugging)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Database connection settings
-$servername = "127.0.0.1";   
-$username   = "root";         
-$password   = "";             
-$dbname     = "career_path_planner";
-$port       = 3307;           
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Load .env
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+// Database connection settings FROM .env
+$servername = $_ENV['DB_HOST'];
+$username   = $_ENV['DB_USER'];
+$password   = $_ENV['DB_PASS'];
+$dbname     = $_ENV['DB_NAME'];
+$port       = $_ENV['DB_PORT'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
@@ -20,24 +26,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Create chat_history table if it doesn’t exist
-/*
 // ---------------------------
-// 2️⃣ Save a message
-// ---------------------------
-function saveMessage($conn, $user_id, $topic, $role, $message) {
-    if ($role === 'ai') $role = 'assistant'; // Map AI role
-    $stmt = $conn->prepare(
-        "INSERT INTO chat_history (user_id, topic, role, content) VALUES (?, ?, ?, ?)"
-    );
-    $stmt->bind_param("isss", $user_id, $topic, $role, $message);
-    $stmt->execute();
-    $stmt->close();
-}
-    */
-
-// ---------------------------
-// 3️⃣ Retrieve chat history for a topic
+// Retrieve chat history for a topic
 // ---------------------------
 function getChatHistory($conn, $user_id, $topic) {
     $stmt = $conn->prepare(
